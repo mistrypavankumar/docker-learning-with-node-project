@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+#### To build container
+```
+docker build .
+```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### To run the container
+```
+docker run -p 3000:3000 [image_id]
+```
 
-## Available Scripts
+#### To run container in background
+```
+docker run -d -p 3000:3000 [image_id]
+```
 
-In the project directory, you can run:
+#### To see processing status (active containers)
+```
+docker ps
+```
 
-### `npm start`
+#### To stop container from running
+```
+docker stop [container_name]
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### To see all containers
+```
+docker ps -a
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### To all the images
+```
+docker image ls
+```
 
-### `npm test`
+#### To remove containers
+```
+docker rm [container_name]
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Run container and after stop automatically remove container from background
+```
+docker run -d --rm -p 3000:3000 [image_id]
+```
 
-### `npm run build`
+#### Creating container with our own name
+```
+docker run -d --rm --name '[testapp]' -p 3001:3000 [image_id]
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Giving name to image
+```
+docker build -t [image_name]:[version] .
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### To remove docker image
+```
+docker image ls
+```
+```
+docker rmi [Repository_name]:[version] or [Image ID]
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+#### If we make any changes in exsiting code then we need to upgrade the version
++ First image of our project
+```
+docker build -t [image_name]:[version1] .
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
++ To run the container
+```
+docker run -d --rm --name '[container_name]' -p 3000:3000 [image_name]:[version1]
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
++ After making changes in the code we build docker image as
+```
+docker build -t [image_name]:[version2] .
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
++ To run the container (port changed if 3000 port is already running)
+```
+docker run -d --rm --name '[container_name]' -p 3001:3000 [image_name]:[version2]
+```
